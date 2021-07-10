@@ -4,20 +4,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.detail.DetailFragment">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.sampleapp.ui.detail.DetailViewModel" />
+    </data>
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_title_fragment"
-            app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageViewBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_small"
+            android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:srcCompat="@drawable/ic_backward" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/textViewBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/detai_back_title"
+            android:layout_marginStart="@dimen/padding_small"
+            app:layout_constraintStart_toEndOf="@+id/imageViewBack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_title"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/padding_big"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewBack" />
+
+
+        <ImageView
+            android:id="@+id/imageViewDetail"
+            android:layout_width="0dp"
+            android:layout_height="266dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.userMedia.mediaUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDetail" />
+
+
+        <TextView
+            android:id="@+id/textViewCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.userMedia.caption}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDetail"/>
+
+
+
+        <TextView
+            android:id="@+id/textViewTimeStamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:formatTimeStamp="@{viewModel.userMedia.timestamp}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCaption"/>
+
+        <ImageView
+            android:id="@+id/imageViewStatus"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:apiStatus="@{viewModel.status}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

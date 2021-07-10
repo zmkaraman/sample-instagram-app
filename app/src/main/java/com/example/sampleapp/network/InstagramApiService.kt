@@ -67,9 +67,9 @@ interface InstagramApiService {
     suspend fun getUserMediaList(@Query("fields") fields: String,
                                  @Query("access_token") accessToken: String) : UserMediaData
 
-    @GET("me/")
-    suspend fun getUserMedia(@Query("") media_id: String, @Query("fields") fields: String,
-                               @Query("access_token") accessToken: String) : UserMedia
+    @GET("{fullUrl}")
+    suspend fun getUserMedia(@Path(value = "fullUrl", encoded = true) fullUrl: String, @Query("fields") fields: String,
+                             @Query("access_token") accessToken: String) : UserMedia
 
 
 }

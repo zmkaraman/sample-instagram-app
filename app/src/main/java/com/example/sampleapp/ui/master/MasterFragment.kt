@@ -31,13 +31,14 @@ class MasterFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_master, container, false)
 
-
         binding.lifecycleOwner = this
         binding.viewModel = graphViewModel
 
         //Add binding values
         viewModelAdapter = MediaDataListAdapter(MediaDataListAdapter.MediaDataListener { mediaData ->
-            view?.let { Navigation.findNavController(it).navigate(R.id.action_masterFragment_to_detailFragment) }
+            view?.let {
+                Navigation.findNavController(it).navigate(MasterFragmentDirections.actionMasterFragmentToDetailFragment(mediaData))
+            }
         })
 
 

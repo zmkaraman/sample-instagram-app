@@ -27,7 +27,11 @@
         android:id="@+id/detailFragment"
         android:name="com.example.sampleapp.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="media"
+            app:argType="com.example.sampleapp.network.model.MediaData"/>
+    </fragment>
     <fragment
         android:id="@+id/webviewFragment"
         android:name="com.example.sampleapp.ui.WebviewFragment"

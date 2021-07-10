@@ -6,9 +6,11 @@
     <string name="redirect_message">You will be redirected, Please wait!</string>
 
     <string name="hello_text">Hello, %1$s!!</string>
-    <string name="feed_title">Your Photos</string>
+    <string name="feed_title">Your Instagram Photos</string>
 
-    <string name="hello_title_fragment">Hello detail fragment</string>
+    <string name="detail_title">Media Details</string>
+    <string name="detai_back_title">Back to Photos</string>
+    <string name="date_title">Date: %1$s</string>
 
 
     <string name="facebook_app_id">208417671167524</string>

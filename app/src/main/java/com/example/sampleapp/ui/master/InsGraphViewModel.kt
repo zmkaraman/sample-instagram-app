@@ -16,9 +16,10 @@ import java.util.logging.Logger
 
 class InsGraphViewModel : ViewModel() {
 
+    /*
     private val _userMediaData = MutableLiveData<List<UserMediaData>>()
     val userMediaData: LiveData<List<UserMediaData>>
-        get() = _userMediaData
+        get() = _userMediaData*/
 
     private val _mediaData = MutableLiveData<List<MediaData>>()
     val mediaData: LiveData<List<MediaData>>

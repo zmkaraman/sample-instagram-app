@@ -11,7 +11,8 @@ class UserMedia(
         @Json(name = "media_type") val mediaType:  String,
         @Json(name = "media_url") val mediaUrl:  String,
         @Json(name = "username") val username:  String,
-        @Json(name = "timestamp") val timestamp:  String
+        @Json(name = "timestamp") val timestamp:  String,
+        @Json(name = "caption") val caption:  String
 ): Parcelable
 
 
