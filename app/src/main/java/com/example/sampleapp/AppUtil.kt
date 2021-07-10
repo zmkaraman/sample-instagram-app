@@ -10,8 +10,13 @@ object AppUtil {
         loginResponse = response
     }
 
+    fun resetLoginResponse() {
+        loginResponse = TokenResponse("","")
+    }
 
-    fun getLoginResponse() : TokenResponse{
+
+    fun getLoginResponse() : TokenResponse {
         return loginResponse
     }
+
 }

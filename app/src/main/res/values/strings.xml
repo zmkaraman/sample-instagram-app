@@ -2,6 +2,7 @@
     <string name="app_name">Sample App</string>
     <string name="login_text">Please Click Button to Login Instagram</string>
     <string name="login_button">Instagram Login</string>
+    <string name="logout">Logout</string>
 
     <string name="redirect_message">You will be redirected, Please wait!</string>
 

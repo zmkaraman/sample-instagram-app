@@ -1,15 +1,14 @@
 package com.example.sampleapp.ui.master
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sampleapp.AppUtil
 import com.example.sampleapp.R
 import com.example.sampleapp.databinding.FragmentMasterBinding
 
@@ -33,6 +32,8 @@ class MasterFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = graphViewModel
+
+        setHasOptionsMenu(true)
 
         //Add binding values
         viewModelAdapter = MediaDataListAdapter(MediaDataListAdapter.MediaDataListener { mediaData ->
@@ -72,6 +73,21 @@ class MasterFragment : Fragment() {
             }
         })
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+               // TODO MERVE instagram logout servisi
+                AppUtil.resetLoginResponse()
+                activity?.finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
     }
 }
