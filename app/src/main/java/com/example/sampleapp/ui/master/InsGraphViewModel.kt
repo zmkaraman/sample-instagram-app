@@ -8,7 +8,6 @@ import com.example.sampleapp.AppUtil
 import com.example.sampleapp.network.ApiStatus
 import com.example.sampleapp.network.InstagramApi
 import com.example.sampleapp.network.model.MediaData
-import com.example.sampleapp.network.model.UserMediaData
 import com.example.sampleapp.network.model.UserNode
 import kotlinx.coroutines.launch
 import java.util.logging.Level
@@ -16,10 +15,6 @@ import java.util.logging.Logger
 
 class InsGraphViewModel : ViewModel() {
 
-    /*
-    private val _userMediaData = MutableLiveData<List<UserMediaData>>()
-    val userMediaData: LiveData<List<UserMediaData>>
-        get() = _userMediaData*/
 
     private val _mediaData = MutableLiveData<List<MediaData>>()
     val mediaData: LiveData<List<MediaData>>
@@ -29,9 +24,10 @@ class InsGraphViewModel : ViewModel() {
     val userNode: LiveData<UserNode>
         get() = _userNode
 
+    /*
     private val _navigateToDetailFragment = MutableLiveData<String>()
     val navigateToDetailFragment: LiveData<String>
-        get() = _navigateToDetailFragment
+        get() = _navigateToDetailFragment*/
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?>
@@ -49,17 +45,16 @@ class InsGraphViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userNode = InstagramApi.retrofitGraphService.getUserNode("id,username", AppUtil.getLoginResponse().accessToken)
+                val userNode = InstagramApi.retrofitGraphService.getUserNode(fieldsUserNode, AppUtil.getLoginResponse().accessToken)
 
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $userNode")
                 _userNode.value = userNode
-
                 _status.value = ApiStatus.DONE
 
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue("Sorry something went wrong! Please try again later!")
+                _errorMessage.postValue(errorMsg)
             }
 
         }
@@ -71,21 +66,27 @@ class InsGraphViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList("id,caption", AppUtil.getLoginResponse().accessToken)
+                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList(fieldsMediaData, AppUtil.getLoginResponse().accessToken)
 
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $userMedia")
 
                 _mediaData.value = userMedia.data
-
                 _status.value = ApiStatus.DONE
 
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue("Sorry something went wrong! Please try again later!")
+                _errorMessage.postValue(errorMsg)
             }
 
         }
+    }
+
+
+    companion object {
+        const val fieldsMediaData = "id,caption"
+        const val fieldsUserNode = "id,username"
+        const val errorMsg = "Sorry something went wrong! Please try again later!"
     }
 
 

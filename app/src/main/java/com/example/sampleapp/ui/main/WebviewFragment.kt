@@ -1,4 +1,4 @@
-package com.example.sampleapp.ui
+package com.example.sampleapp.ui.main
 
 import androidx.fragment.app.Fragment
 import com.example.sampleapp.databinding.FragmentWebviewBinding
@@ -22,7 +22,6 @@ import java.util.logging.Logger
 
 class WebviewFragment : Fragment() {
 
-    //TODO MERVE lazy
     lateinit var binding: FragmentWebviewBinding
     private var isContentload = false
     private lateinit var requestUrl: String
@@ -105,7 +104,6 @@ class WebviewFragment : Fragment() {
                     val code = url.getCodeFromRedirectUrl()
                     Logger.getLogger("WebviewFragment").log(Level.INFO, "code: $code")
 
-                    //TODO MERVE bunu bindingadapterden yapaiblir miyim
                     binding.webView.visibility = View.INVISIBLE
                     binding.textViewRedirect.visibility = View.VISIBLE
 

@@ -9,7 +9,6 @@ import com.example.sampleapp.network.ApiStatus
 import com.example.sampleapp.network.InstagramApi
 import com.example.sampleapp.network.model.UserMedia
 import kotlinx.coroutines.launch
-import java.util.logging.Logger
 
 class DetailViewModel : ViewModel() {
 
@@ -33,7 +32,7 @@ class DetailViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userMedia = InstagramApi.retrofitGraphService.getUserMedia(mediaId, "id,media_type,media_url,username,timestamp,caption", AppUtil.getLoginResponse().accessToken)
+                val userMedia = InstagramApi.retrofitGraphService.getUserMedia(mediaId, fields, AppUtil.getLoginResponse().accessToken)
 
                 _userMedia.value = userMedia
 
@@ -42,9 +41,14 @@ class DetailViewModel : ViewModel() {
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue("Sorry something went wrong! Please try again later!")
+                _errorMessage.postValue(errorMsg)
             }
 
         }
+    }
+
+    companion object {
+        const val fields = "id,media_type,media_url,username,timestamp,caption"
+        const val errorMsg = "Sorry something went wrong! Please try again later!"
     }
 }
