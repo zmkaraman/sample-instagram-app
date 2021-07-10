@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sampleapp.AppUtil
+import com.example.sampleapp.AppUtil.CLIENT_ID
 import com.example.sampleapp.network.ApiStatus
 import com.example.sampleapp.network.InstagramApi
 import com.example.sampleapp.network.model.TokenResponse
@@ -24,8 +25,8 @@ class InsApiViewModel : ViewModel() {
     val userNode: LiveData<UserNode>
         get() = _userNode
 
-    private val _navigateToMasterFragment = MutableLiveData<String>()
-    val navigateToMasterFragment: LiveData<String>
+    private val _navigateToMasterFragment = MutableLiveData<Boolean>()
+    val navigateToMasterFragment: LiveData<Boolean>
         get() = _navigateToMasterFragment
 
     private val _errorMessage = MutableLiveData<String?>()
@@ -48,24 +49,29 @@ class InsApiViewModel : ViewModel() {
                 _status.value = ApiStatus.LOADING
 
                 val loginResponse = InstagramApi.retrofitService.getAuthTokenWithCode(
-                        clientId = "1004234350366384",
+                        CLIENT_ID,
                         "d2fa3ec0425681875fffed540602b665", "authorization_code",
                         "https://sampleapp.com/oauth", code
                 )
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $loginResponse")
 
-                //disaridan
                 AppUtil.setLoginResponse(loginResponse)
                 //TODO MERVE
-                _navigateToMasterFragment.value = loginResponse.accessToken
+                _navigateToMasterFragment.value = true
                 _status.value = ApiStatus.DONE
 
             } catch (e: Exception) {
-                _errorMessage.postValue("Sorry something went wrong! Please try again later!")
+                _navigateToMasterFragment.value = false
+                _errorMessage.postValue(errorMsg)
                 _status.value = ApiStatus.ERROR
 
             }
 
         }
+    }
+
+    companion object {
+        const val fields = "id,media_type,media_url,username,timestamp,caption"
+        const val errorMsg = "Sorry something went wrong! Please try again later!"
     }
 }

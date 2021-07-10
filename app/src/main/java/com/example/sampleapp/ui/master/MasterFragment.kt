@@ -80,7 +80,7 @@ class MasterFragment : Fragment() {
             R.id.logout -> {
                // TODO MERVE instagram logout servisi
                 AppUtil.resetLoginResponse()
-                activity?.finish()
+                view?.let { Navigation.findNavController(it).navigate(MasterFragmentDirections.actionMasterFragmentToLoginFragment()) }
             }
         }
         return super.onOptionsItemSelected(item)

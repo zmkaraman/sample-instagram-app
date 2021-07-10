@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.sampleapp.AppUtil.CLIENT_ID
 import com.example.sampleapp.R
 import com.example.sampleapp.extension.getCodeFromRedirectUrl
 import java.util.logging.Level
@@ -34,8 +35,7 @@ class WebviewFragment : Fragment() {
 
     private fun initRequestUrl() {
         requestUrl = context?.resources?.getString(R.string.base_url) +
-                "oauth/authorize/?client_id=" +
-                context?.resources?.getString(R.string.client_id) +
+                "oauth/authorize/?client_id=" + CLIENT_ID +
                 "&redirect_uri=" + context?.resources?.getString(R.string.redirect_uri) +
                 "&response_type=code&scope=user_profile,user_media"
     }
@@ -56,14 +56,10 @@ class WebviewFragment : Fragment() {
         binding.webView.settings.javaScriptEnabled = true
         setWebViewClient()
 
-
         binding.webView.loadUrl(requestUrl)
 
         apiViewModel.navigateToMasterFragment.observe(viewLifecycleOwner, Observer {
-            if (null != it) {
-                //this.findNavController().navigate(OverviewFragmentDirections.actionShowDetail(it))
-                //viewModel.displayPropertyDetailsComplete()
-
+            if (it) {
                 view?.let { it1 -> Navigation.findNavController(it1).navigate(R.id.action_webviewFragment_to_masterFragment) }
             }
         })

@@ -15,7 +15,6 @@
 
 
     <string name="facebook_app_id">208417671167524</string>
-    <string name="client_id">1004234350366384</string>
     <string name="redirect_uri">https://sampleapp.com/oauth</string>
     <string name="base_url">https://api.instagram.com/</string>
     <string name="get_user_info_url">https://api.instagram.com/v1/users/self/?access_token=</string>

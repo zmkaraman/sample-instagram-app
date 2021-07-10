@@ -1,5 +1,6 @@
 package com.example.sampleapp.network
 
+import com.example.sampleapp.AppUtil.CLIENT_ID
 import com.example.sampleapp.network.model.TokenResponse
 import com.example.sampleapp.network.model.UserMedia
 import com.example.sampleapp.network.model.UserMediaData
@@ -19,7 +20,6 @@ import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.instagram.com/"
 private const val BASE_GRAPH_URL = "https://graph.instagram.com/"
-private const val CLIENT_ID = "1004234350366384"
 
 // Add adapters for Java Date and custom adapter ElectionAdapter (included in project)
 private val moshi = Moshi.Builder()
