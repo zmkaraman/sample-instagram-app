@@ -32,7 +32,7 @@ class DetailViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userMedia = InstagramApi.retrofitGraphService.getUserMedia(mediaId, fields, AppUtil.getLoginResponse().accessToken)
+                val userMedia = InstagramApi.retrofitGraphService.getUserMedia(mediaId, FIELDS, AppUtil.getLoginResponse().accessToken)
 
                 _userMedia.value = userMedia
 
@@ -41,14 +41,14 @@ class DetailViewModel : ViewModel() {
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue(errorMsg)
+                _errorMessage.postValue(ERROR_MSG)
             }
 
         }
     }
 
     companion object {
-        const val fields = "id,media_type,media_url,username,timestamp,caption"
-        const val errorMsg = "Sorry something went wrong! Please try again later!"
+        const val FIELDS = "id,media_type,media_url,username,timestamp,caption"
+        const val ERROR_MSG = "Sorry something went wrong! Please try again later!"
     }
 }

@@ -24,11 +24,6 @@ class InsGraphViewModel : ViewModel() {
     val userNode: LiveData<UserNode>
         get() = _userNode
 
-    /*
-    private val _navigateToDetailFragment = MutableLiveData<String>()
-    val navigateToDetailFragment: LiveData<String>
-        get() = _navigateToDetailFragment*/
-
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?>
         get() = _errorMessage
@@ -45,7 +40,7 @@ class InsGraphViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userNode = InstagramApi.retrofitGraphService.getUserNode(fieldsUserNode, AppUtil.getLoginResponse().accessToken)
+                val userNode = InstagramApi.retrofitGraphService.getUserNode(FIELDS_USER_NODE, AppUtil.getLoginResponse().accessToken)
 
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $userNode")
                 _userNode.value = userNode
@@ -54,7 +49,7 @@ class InsGraphViewModel : ViewModel() {
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue(errorMsg)
+                _errorMessage.postValue(ERROR_MSG)
             }
 
         }
@@ -66,7 +61,7 @@ class InsGraphViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList(fieldsMediaData, AppUtil.getLoginResponse().accessToken)
+                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList(FIELDS_MEDIA_DATA, AppUtil.getLoginResponse().accessToken)
 
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $userMedia")
 
@@ -76,7 +71,7 @@ class InsGraphViewModel : ViewModel() {
             } catch (e: Exception) {
 
                 _status.value = ApiStatus.ERROR
-                _errorMessage.postValue(errorMsg)
+                _errorMessage.postValue(ERROR_MSG)
             }
 
         }
@@ -84,9 +79,9 @@ class InsGraphViewModel : ViewModel() {
 
 
     companion object {
-        const val fieldsMediaData = "id,caption"
-        const val fieldsUserNode = "id,username"
-        const val errorMsg = "Sorry something went wrong! Please try again later!"
+        const val FIELDS_MEDIA_DATA = "id,caption"
+        const val FIELDS_USER_NODE = "id,username"
+        const val ERROR_MSG = "Sorry something went wrong! Please try again later!"
     }
 
 

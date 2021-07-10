@@ -14,7 +14,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.sampleapp.AppUtil.AUTH_PREFIX
+import com.example.sampleapp.AppUtil.BASE_URL
 import com.example.sampleapp.AppUtil.CLIENT_ID
+import com.example.sampleapp.AppUtil.OATH_LINK
+import com.example.sampleapp.AppUtil.POSTFIX
+import com.example.sampleapp.AppUtil.REDIRECT_PREFIX
+import com.example.sampleapp.AppUtil.REDIRECT_URI
 import com.example.sampleapp.R
 import com.example.sampleapp.extension.getCodeFromRedirectUrl
 import java.util.logging.Level
@@ -26,23 +32,19 @@ class WebviewFragment : Fragment() {
     lateinit var binding: FragmentWebviewBinding
     private var isContentload = false
     private lateinit var requestUrl: String
-    private val authPrefix = "https://sampleapp.com/oauth?code="
-
 
     private val apiViewModel: InsApiViewModel by lazy {
         ViewModelProvider(this).get(InsApiViewModel::class.java)
     }
 
     private fun initRequestUrl() {
-        requestUrl = context?.resources?.getString(R.string.base_url) +
-                "oauth/authorize/?client_id=" + CLIENT_ID +
-                "&redirect_uri=" + context?.resources?.getString(R.string.redirect_uri) +
-                "&response_type=code&scope=user_profile,user_media"
+        requestUrl = BASE_URL + OATH_LINK + CLIENT_ID +
+                REDIRECT_PREFIX + REDIRECT_URI + POSTFIX
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         initRequestUrl()
@@ -51,7 +53,6 @@ class WebviewFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = apiViewModel
-
 
         binding.webView.settings.javaScriptEnabled = true
         setWebViewClient()
@@ -67,6 +68,7 @@ class WebviewFragment : Fragment() {
         apiViewModel.errorMessage.observe(viewLifecycleOwner, {
             it?.let {
                 Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
+                binding.textViewRedirect.text = it
             }
         })
 
@@ -74,7 +76,7 @@ class WebviewFragment : Fragment() {
     }
 
     private fun setWebViewClient() {
-        binding?.webView?.webViewClient = object : WebViewClient() {
+        binding.webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
                 Logger.getLogger("WebviewFragment").log(Level.INFO, "shouldOverrideUrlLoading")
@@ -95,7 +97,7 @@ class WebviewFragment : Fragment() {
                 isContentload = true
                 super.onPageFinished(view, url)
 
-                if (url.contains(authPrefix)) {
+                if (url.contains(AUTH_PREFIX)) {
 
                     val code = url.getCodeFromRedirectUrl()
                     Logger.getLogger("WebviewFragment").log(Level.INFO, "code: $code")
