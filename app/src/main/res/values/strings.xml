@@ -5,8 +5,8 @@
 
     <string name="redirect_message">You will be redirected, Please wait!</string>
 
-    <string name="hello_blank_fragment">Hello username!!!</string>
-    <string name="feed_title">Your Feed</string>
+    <string name="hello_text">Hello, %1$s!!</string>
+    <string name="feed_title">Your Photos</string>
 
     <string name="hello_title_fragment">Hello detail fragment</string>
 

@@ -17,14 +17,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:apiStatus="@{viewModel.status}" />
+
         <TextView
             android:id="@+id/textViewMaster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/text_padding"
-            android:text="@{viewModel.userNode.username}"
             android:textColor="@color/purple_200"
             android:textSize="@dimen/title_text_size"
+            app:formatUserName="@{viewModel.userNode.username}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +44,7 @@
             android:id="@+id/textViewPhotos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_big"
+            android:layout_marginTop="@dimen/padding_medium"
             android:padding="@dimen/text_padding"
             android:text="@string/feed_title"
             android:textSize="@dimen/message_text_size"

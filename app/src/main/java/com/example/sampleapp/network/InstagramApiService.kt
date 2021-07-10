@@ -41,6 +41,8 @@ private val retrofitGraph = Retrofit.Builder()
         .build()
 
 
+enum class ApiStatus { LOADING, ERROR, DONE }
+
 
 interface InstagramApiService {
 
