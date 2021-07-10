@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout">
+
+    <data>
+        <variable
+            name="media"
+            type="com.example.sampleapp.network.model.MediaData" />
+        <variable
+            name="clickListener"
+            type="com.example.sampleapp.ui.master.MediaDataListAdapter.MediaDataListener"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_padding_small"
+        android:onClick="@{() -> clickListener.onClick(media)}">
+
+        <TextView
+            android:id="@+id/textViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{media.id}"
+            tools:text="ID"/>
+
+        <TextView
+            android:id="@+id/textViewCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_padding_small"
+            android:layout_marginBottom="@dimen/default_padding_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewId"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{media.caption}"
+            tools:text="Caption"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

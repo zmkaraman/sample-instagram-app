@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Sample App</string>
+    <string name="login_text">Please Click Button to Login Instagram</string>
+    <string name="login_button">Instagram Login</string>
+
+    <string name="redirect_message">You will be redirected, Please wait!</string>
+
+    <string name="hello_blank_fragment">Hello username!!!</string>
+    <string name="feed_title">Your Feed</string>
+
+    <string name="hello_title_fragment">Hello detail fragment</string>
+
+
+    <string name="facebook_app_id">208417671167524</string>
+    <string name="client_id">1004234350366384</string>
+    <string name="redirect_uri">https://sampleapp.com/oauth</string>
+    <string name="base_url">https://api.instagram.com/</string>
+    <string name="get_user_info_url">https://api.instagram.com/v1/users/self/?access_token=</string>
+
+</resources>
