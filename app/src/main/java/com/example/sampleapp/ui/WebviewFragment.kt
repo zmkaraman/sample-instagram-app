@@ -50,6 +50,10 @@ class WebviewFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_webview, container, false)
 
+        binding.lifecycleOwner = this
+        binding.viewModel = apiViewModel
+
+
         binding.webView.settings.javaScriptEnabled = true
         setWebViewClient()
 

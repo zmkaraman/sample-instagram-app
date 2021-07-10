@@ -19,7 +19,7 @@
 
 
         <ImageView
-            android:id="@+id/status_image"
+            android:id="@+id/imageViewStatus"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"

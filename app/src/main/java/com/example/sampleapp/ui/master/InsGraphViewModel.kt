@@ -70,7 +70,7 @@ class InsGraphViewModel : ViewModel() {
             try {
 
                 _status.value = ApiStatus.LOADING
-                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList("id,username", AppUtil.getLoginResponse().accessToken)
+                val userMedia = InstagramApi.retrofitGraphService.getUserMediaList("id,caption", AppUtil.getLoginResponse().accessToken)
 
                 Logger.getLogger("InstagramViewModel").log(Level.INFO, "responseBody: $userMedia")
 
