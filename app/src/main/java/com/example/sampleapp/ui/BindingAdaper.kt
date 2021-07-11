@@ -28,7 +28,6 @@ fun bindTimeStamp(textView: TextView, timestamp: String?) {
 
 }
 
-
 @BindingAdapter("apiStatus")
 fun bindStatus(statusImageView: ImageView, apiStatus: ApiStatus?) {
 
@@ -44,7 +43,6 @@ fun bindStatus(statusImageView: ImageView, apiStatus: ApiStatus?) {
         }
     }
 }
-
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
