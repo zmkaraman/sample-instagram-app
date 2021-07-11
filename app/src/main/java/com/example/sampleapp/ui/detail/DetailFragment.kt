@@ -33,6 +33,10 @@ class DetailFragment : Fragment() {
             activity?.onBackPressed()
         }
 
+        binding.imageViewBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         media?.let {
             detailViewModel.getUserMediaData(it.id)
         }
@@ -43,7 +47,6 @@ class DetailFragment : Fragment() {
                 //TODO MERVE aksiyon ?
             }
         })
-
 
         return binding.root
     }

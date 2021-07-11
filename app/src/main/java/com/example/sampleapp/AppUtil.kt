@@ -14,7 +14,6 @@ object AppUtil {
     const val POSTFIX = "&response_type=code&scope=user_profile,user_media"
     const val REDIRECT_PREFIX = "&redirect_uri="
 
-
     fun setLoginResponse(response: TokenResponse) {
         loginResponse = response
     }
