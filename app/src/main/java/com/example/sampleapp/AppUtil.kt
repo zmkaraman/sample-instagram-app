@@ -11,6 +11,7 @@ object AppUtil {
     const val AUTH_PREFIX = "$REDIRECT_URI?code="
     const val OATH_LINK = "oauth/authorize/?client_id="
     const val BASE_URL = "https://api.instagram.com/"
+    const val LOGOUT_URL = "https://www.instagram.com/accounts/logout/"
     const val POSTFIX = "&response_type=code&scope=user_profile,user_media"
     const val REDIRECT_PREFIX = "&redirect_uri="
 

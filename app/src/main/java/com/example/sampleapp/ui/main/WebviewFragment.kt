@@ -5,6 +5,9 @@ import com.example.sampleapp.databinding.FragmentWebviewBinding
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -14,9 +17,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.example.sampleapp.AppUtil
 import com.example.sampleapp.AppUtil.AUTH_PREFIX
 import com.example.sampleapp.AppUtil.BASE_URL
 import com.example.sampleapp.AppUtil.CLIENT_ID
+import com.example.sampleapp.AppUtil.LOGOUT_URL
 import com.example.sampleapp.AppUtil.OATH_LINK
 import com.example.sampleapp.AppUtil.POSTFIX
 import com.example.sampleapp.AppUtil.REDIRECT_PREFIX
@@ -72,6 +77,8 @@ class WebviewFragment : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -79,10 +86,9 @@ class WebviewFragment : Fragment() {
         binding.webView.webViewClient = object : WebViewClient() {
 
             override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
-                Logger.getLogger("WebviewFragment").log(Level.INFO, "shouldOverrideUrlLoading")
+                Logger.getLogger("WebviewFragment").log(Level.INFO, "shouldOverrideUrlLoading: $url")
 
                 if (url.startsWith("redirect_url")) {
-                    Logger.getLogger("WebviewFragment").log(Level.INFO, "shouldOverrideUrlLoading true")
                     return true
                 }
                 return false
@@ -97,8 +103,9 @@ class WebviewFragment : Fragment() {
                 isContentload = true
                 super.onPageFinished(view, url)
 
-                if (url.contains(AUTH_PREFIX)) {
+                Logger.getLogger("WebviewFragment").log(Level.INFO, "onPageFinished: $url")
 
+                if (url.contains(AUTH_PREFIX)) {
                     val code = url.getCodeFromRedirectUrl()
                     Logger.getLogger("WebviewFragment").log(Level.INFO, "code: $code")
 
@@ -110,6 +117,22 @@ class WebviewFragment : Fragment() {
 
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                AppUtil.resetLoginResponse()
+                binding.webView.loadUrl(LOGOUT_URL)
+                view?.let { Navigation.findNavController(it).navigate(R.id.action_webviewFragment_to_loginFragment) }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
     }
 }
 

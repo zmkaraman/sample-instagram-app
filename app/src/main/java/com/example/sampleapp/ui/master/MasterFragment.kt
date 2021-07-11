@@ -78,7 +78,6 @@ class MasterFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
-               // TODO MERVE instagram logout servisi
                 AppUtil.resetLoginResponse()
                 view?.let { Navigation.findNavController(it).navigate(MasterFragmentDirections.actionMasterFragmentToLoginFragment()) }
             }

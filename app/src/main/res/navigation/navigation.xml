@@ -47,5 +47,8 @@
         <action
             android:id="@+id/action_webviewFragment_to_masterFragment"
             app:destination="@id/masterFragment" />
+        <action
+            android:id="@+id/action_webviewFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
