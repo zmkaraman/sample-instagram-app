@@ -17,7 +17,8 @@ Or you can create your own app and client_id https://developers.facebook.com/app
 ![Screenshot 2](screenshots/screen_2.png)
 ![Screenshot 3](screenshots/screen_3.png)
 ![Screenshot 4](screenshots/screen_4.png)
-![Screenshot 4](screenshots/screen_5.png)
+![Screenshot 5](screenshots/screen_5.png)
+![Screenshot 6](screenshots/screen_6.png)
 
 
 

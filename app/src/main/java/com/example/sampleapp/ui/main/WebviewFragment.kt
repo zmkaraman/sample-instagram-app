@@ -35,15 +35,14 @@ import java.util.logging.Logger
 class WebviewFragment : Fragment() {
 
     lateinit var binding: FragmentWebviewBinding
-    private var isContentload = false
-    private lateinit var requestUrl: String
+
 
     private val apiViewModel: InsApiViewModel by lazy {
         ViewModelProvider(this).get(InsApiViewModel::class.java)
     }
 
-    private fun initRequestUrl() {
-        requestUrl = BASE_URL + OATH_LINK + CLIENT_ID +
+    private fun getRequestUrl(): String {
+       return BASE_URL + OATH_LINK + CLIENT_ID +
                 REDIRECT_PREFIX + REDIRECT_URI + POSTFIX
     }
 
@@ -52,17 +51,13 @@ class WebviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        initRequestUrl()
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_webview, container, false)
-
         binding.lifecycleOwner = this
         binding.viewModel = apiViewModel
-
         binding.webView.settings.javaScriptEnabled = true
         setWebViewClient()
 
-        binding.webView.loadUrl(requestUrl)
+        binding.webView.loadUrl(getRequestUrl())
 
         apiViewModel.navigateToMasterFragment.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -100,9 +95,7 @@ class WebviewFragment : Fragment() {
 
             override fun onPageFinished(view: WebView?, url: String) {
                 binding.webView.visibility = View.VISIBLE
-                isContentload = true
                 super.onPageFinished(view, url)
-
                 Logger.getLogger("WebviewFragment").log(Level.INFO, "onPageFinished: $url")
 
                 if (url.contains(AUTH_PREFIX)) {

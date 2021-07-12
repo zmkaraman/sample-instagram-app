@@ -61,7 +61,6 @@ class MasterFragment : Fragment() {
         graphViewModel.errorMessage.observe(viewLifecycleOwner, {
             it?.let {
                 Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
-                //TODO MERVE aksiyon ?
             }
         })
 
